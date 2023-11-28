@@ -18,7 +18,7 @@ Customer databases, transactional data, CRM systems, demographic data sources
 ## Have data populated into that database tables
 ## Create different tables 
 ## Create a customer database schema 
-![Customer Database Schema](customer_database_schema_version_1.png)
+![Customer Database Schema](../customer_segmentation/data_engineering/images/customer_database_schema_version_1.png)
 
 # Tools
 -   Amazon Web Services(AWS)
