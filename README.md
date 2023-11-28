@@ -16,7 +16,7 @@ Customer databases, transactional data, CRM systems, demographic data sources
 
 ## Create a customer database schema 
 
-![Customer Database Schema]('data_engineering/images/customer_database_schema_version_1.png')
+![Customer Database Schema](customer_segmentation\data_engineering\images\customer_database_schema_version_1.png)
 
 ## Create different tables 
 ```
