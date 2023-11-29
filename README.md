@@ -112,11 +112,19 @@ CREATE TABLE Compliance (
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 ```
+## Have data populated into that database tables
+Inorder to populate the tables in the database am going to have to connect to the database and then populated the different table using a python library called faker
+1 - Connect to database
 
 
 ## Have a functional database running
-## Have data populated into that database tables
+
 
 
 # Tools
 -   Amazon Web Services(AWS)
+-   MySQL Workbench
+
+# Python Libraries
+-   Faker
+-   mysql-connector-python
