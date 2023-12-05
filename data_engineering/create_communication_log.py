@@ -6,6 +6,7 @@ import connect_to_database
 
 fake = Faker()
 
+
 # Create a cursor object
 cursor = connect_to_database.connection.cursor()
 
@@ -22,44 +23,44 @@ customer_ids = cursor.fetchall()
 # Print the selected column
 print(customer_ids)
 
-account = ['Savings Account','Checking/Current Account','Certificate of Deposit (CD)','Individual Retirement Account (IRA)','Business Account','Trust Account','Custodial Account']
+communication = ['Phone Call','Email','Online Chat','In-Person Visit','Letter','Mobile App']
 
-status = ['Active','Inactive/Dormant','Closed','Blocked/Frozen','Limited/Restricted','Defaulted']
+# status = ['Active','Inactive/Dormant','Closed','Blocked/Frozen','Limited/Restricted','Defaulted']
 
-def create_accounts():
-    accounts_data = []
+def create_communications():
+    communications_data = []
 
     for customer_id in customer_ids:
 
         # Generate a random number between 1 and 10 (you can adjust the range)
         # One person can have maximum of 5 accounts
-        random_iterations = random.randint(1, 5)
+        random_iterations = random.randint(1, 20)
 
         # Run the for loop for the random number of times
         for i in range(random_iterations):
             # Generate a fake account_id
-            fake_account_id = fake.port_number()
-            print("Fake customer_id:", fake_account_id)
+            fake_log_id = fake.port_number()
+            print("Fake_log_id:", fake_log_id)
 
             #Generate a fake account type
-            account_type = random.choice(account)
+            communication_type = random.choice(communication)
 
             #Generate a fake status
-            status_type = random.choice(status)
+            # status_type = random.choice(status)
 
             # Generate a fake balance
-            fake_balance = fake.random_number()
-            print("Fake balance:", fake_balance)
+            fake_timestamp = fake.time()
+            print("Fake timestamp:", fake_timestamp)
 
             #create a tuple named row
-            row = (fake_account_id,customer_id[0],account_type,fake_balance,status_type)
+            row = (fake_log_id,customer_id[0],communication_type,fake_timestamp)
             # print(row)
             #append into customer_data_list
-            accounts_data.append(row)
+            communications_data.append(row)
 
             print(f"This is iteration number {i + 1}")
 
-    return accounts_data
+    return communications_data
     
 # def delete_duplicates():
 #     # Execute a query to select a specific column from a table
@@ -69,12 +70,12 @@ def create_accounts():
 #     return query
 
 #Run the create accounts function
-accounts = create_accounts()
+accounts = create_communications()
 
 # SQL statement to perform the insertions
 insert_account = """
-    INSERT INTO Account (account_id, customer_id, account_type, balance, account_status)
-    VALUES (%s, %s, %s, %s, %s)
+    INSERT INTO CommunicationLog (log_id, customer_id, communication_type, timestamp)
+    VALUES (%s, %s, %s, %s)
 """
 
 # Execute the SQL statement for each set of data

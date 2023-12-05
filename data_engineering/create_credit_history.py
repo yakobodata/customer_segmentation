@@ -6,6 +6,7 @@ import connect_to_database
 
 fake = Faker()
 
+
 # Create a cursor object
 cursor = connect_to_database.connection.cursor()
 
@@ -22,44 +23,40 @@ customer_ids = cursor.fetchall()
 # Print the selected column
 print(customer_ids)
 
-account = ['Savings Account','Checking/Current Account','Certificate of Deposit (CD)','Individual Retirement Account (IRA)','Business Account','Trust Account','Custodial Account']
+credit_score = ['800 - 850','740 - 799','670 - 739','580 - 669','300 - 579']
 
-status = ['Active','Inactive/Dormant','Closed','Blocked/Frozen','Limited/Restricted','Defaulted']
 
-def create_accounts():
-    accounts_data = []
+
+def create_credit_history():
+    credit_data = []
 
     for customer_id in customer_ids:
-
+        # Generate a fake credit_id
         # Generate a random number between 1 and 10 (you can adjust the range)
         # One person can have maximum of 5 accounts
         random_iterations = random.randint(1, 5)
 
         # Run the for loop for the random number of times
         for i in range(random_iterations):
-            # Generate a fake account_id
-            fake_account_id = fake.port_number()
-            print("Fake customer_id:", fake_account_id)
+            fake_credit_id = fake.port_number()
+            print("Fake credit_id:", fake_credit_id)
 
             #Generate a fake account type
-            account_type = random.choice(account)
+            fake_fico_credit_score = random.choice(credit_score)
 
-            #Generate a fake status
-            status_type = random.choice(status)
-
-            # Generate a fake balance
-            fake_balance = fake.random_number()
-            print("Fake balance:", fake_balance)
+            # Generate a credit_limit
+            fake_credit_limit = fake.random_number()
+            print("Fake credit_limit:", fake_credit_limit)
 
             #create a tuple named row
-            row = (fake_account_id,customer_id[0],account_type,fake_balance,status_type)
+            row = (fake_credit_id,customer_id[0],fake_fico_credit_score,fake_credit_limit)
             # print(row)
             #append into customer_data_list
-            accounts_data.append(row)
+            credit_data.append(row)
 
             print(f"This is iteration number {i + 1}")
-
-    return accounts_data
+            
+    return credit_data
     
 # def delete_duplicates():
 #     # Execute a query to select a specific column from a table
@@ -69,16 +66,16 @@ def create_accounts():
 #     return query
 
 #Run the create accounts function
-accounts = create_accounts()
+credits = create_credit_history()
 
 # SQL statement to perform the insertions
 insert_account = """
-    INSERT INTO Account (account_id, customer_id, account_type, balance, account_status)
-    VALUES (%s, %s, %s, %s, %s)
+    INSERT INTO CreditHistory (credit_id, customer_id, credit_score, credit_limit)
+    VALUES (%s, %s, %s, %s)
 """
 
 # Execute the SQL statement for each set of data
-for entry in accounts:
+for entry in credits:
     cursor.execute(insert_account, entry)
     print(entry)
 

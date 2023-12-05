@@ -6,60 +6,66 @@ import connect_to_database
 
 fake = Faker()
 
+
 # Create a cursor object
 cursor = connect_to_database.connection.cursor()
 
 # Execute a query to select a specific column from a table
-column_name = 'customer_id'  # Replace 'column_name_here' with your column name
-table_name = 'Customer'    # Replace 'table_name_here' with your table name
+column_name = 'account_id'  # Replace 'column_name_here' with your column name
+table_name = 'Account'    # Replace 'table_name_here' with your table name
 query = f"SELECT {column_name} FROM {table_name}"
 
 cursor.execute(query)
 
 # Fetch the results
-customer_ids = cursor.fetchall()
+account_ids = cursor.fetchall()
 
 # Print the selected column
-print(customer_ids)
+print(account_ids)
 
-account = ['Savings Account','Checking/Current Account','Certificate of Deposit (CD)','Individual Retirement Account (IRA)','Business Account','Trust Account','Custodial Account']
+transaction_type = ['Purchase','Financial','Online','Credit','Investment','Payment ','Subscription','Wire']
 
-status = ['Active','Inactive/Dormant','Closed','Blocked/Frozen','Limited/Restricted','Defaulted']
 
-def create_accounts():
-    accounts_data = []
+def create_transactions():
+    transactional_data = []
 
-    for customer_id in customer_ids:
+    for account_id in account_ids:
 
         # Generate a random number between 1 and 10 (you can adjust the range)
         # One person can have maximum of 5 accounts
-        random_iterations = random.randint(1, 5)
+        random_iterations = random.randint(1, 100)
 
         # Run the for loop for the random number of times
         for i in range(random_iterations):
-            # Generate a fake account_id
-            fake_account_id = fake.port_number()
-            print("Fake customer_id:", fake_account_id)
+            # Generate a fake transaction_id
+            fake_transaction_id = fake.port_number()
+            print("Fake transaction_id:", fake_transaction_id)
 
-            #Generate a fake account type
-            account_type = random.choice(account)
+            # Generate a fake transaction type
+            fake_transaction_type = random.choice(transaction_type)
+            print("Fake transaction_type:", fake_transaction_type)
 
-            #Generate a fake status
-            status_type = random.choice(status)
 
-            # Generate a fake balance
-            fake_balance = fake.random_number()
-            print("Fake balance:", fake_balance)
+            # Generate a fake amount
+            fake_amount = fake.random_number()
+            print("Fake amount:", fake_amount)
+
+            # Generate a fake transactional_date
+            fake_transactional_date = fake.date()
+            print("Fake transactional date:", fake_transactional_date)
+
+            #Generate a fake payment method
+            # fake_payment_method = random.choice(payment_method)
 
             #create a tuple named row
-            row = (fake_account_id,customer_id[0],account_type,fake_balance,status_type)
+            row = (fake_transaction_id,account_id[0],fake_transaction_type,fake_amount,fake_transactional_date)
             # print(row)
             #append into customer_data_list
-            accounts_data.append(row)
+            transactional_data.append(row)
 
             print(f"This is iteration number {i + 1}")
 
-    return accounts_data
+    return transactional_data
     
 # def delete_duplicates():
 #     # Execute a query to select a specific column from a table
@@ -69,17 +75,17 @@ def create_accounts():
 #     return query
 
 #Run the create accounts function
-accounts = create_accounts()
+transactions = create_transactions()
 
 # SQL statement to perform the insertions
-insert_account = """
-    INSERT INTO Account (account_id, customer_id, account_type, balance, account_status)
+insert_transaction = """
+    INSERT INTO Transaction (transaction_id, account_id, transaction_type, amount, transaction_date)
     VALUES (%s, %s, %s, %s, %s)
 """
 
 # Execute the SQL statement for each set of data
-for entry in accounts:
-    cursor.execute(insert_account, entry)
+for entry in transactions:
+    cursor.execute(insert_transaction, entry)
     print(entry)
 
 # Commit the changes to the database

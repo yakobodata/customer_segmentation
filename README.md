@@ -27,7 +27,7 @@ show databases;
 use customers;
 
 CREATE TABLE Customer (
-    customer_id INT PRIMARY KEY,
+    customer_id INT,
     name VARCHAR(100),
     email VARCHAR(100),
     phone VARCHAR(20),
@@ -37,13 +37,13 @@ CREATE TABLE Customer (
 );
 
 
-CREATE TABLE Accounts (
-    account_id INT PRIMARY KEY,
+CREATE TABLE Account (
+    account_id INT ,
     customer_id INT,
     account_type VARCHAR(50),
     balance DECIMAL(18, 2),
     status VARCHAR(20),
-    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+    
 );
 
 CREATE TABLE Transactions (
@@ -160,3 +160,10 @@ finally:
 -   Faker
 -   mysql-connector-python
 -   pymysql
+-   random
+
+
+03/12/2023
+Am now working on the accounts table
+
+Working on credit history table
