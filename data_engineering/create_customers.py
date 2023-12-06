@@ -51,7 +51,7 @@ def make_customers():
         print("Fake gender:", fake_gender)
 
         #create a tuple named row
-        row = (fake_customer_id,fake_name,fake_phone,fake_email,fake_address,fake_date_of_birth,fake_identification_number,fake_gender)
+        row = (fake_customer_id,fake_name,fake_email,fake_phone,fake_address,fake_date_of_birth,fake_identification_number,fake_gender)
         print(row)
         #append into customer_data_list
         customer_data.append(row)

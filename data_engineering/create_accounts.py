@@ -2,12 +2,15 @@ import pymysql
 import credentials
 from faker import Faker
 import random
-import connect_to_database
-
+from connect_to_database import connect
 fake = Faker()
 
 # Create a cursor object
-cursor = connect_to_database.connection.cursor()
+connection = connect()
+
+cursor = connection.cursor()
+print(connection)
+
 
 # Execute a query to select a specific column from a table
 column_name = 'customer_id'  # Replace 'column_name_here' with your column name
@@ -73,7 +76,7 @@ accounts = create_accounts()
 
 # SQL statement to perform the insertions
 insert_account = """
-    INSERT INTO Account (account_id, customer_id, account_type, balance, account_status)
+    INSERT INTO Account (account_id, customer_id, account_type, balance, status_type)
     VALUES (%s, %s, %s, %s, %s)
 """
 
@@ -83,7 +86,7 @@ for entry in accounts:
     print(entry)
 
 # Commit the changes to the database
-connect_to_database.connection.commit()
+connection.commit()
 
 #Delete any duplicates
 # cursor.execute(delete_duplicates())

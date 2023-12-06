@@ -43,7 +43,6 @@ CREATE TABLE Account (
     account_type VARCHAR(50),
     balance DECIMAL(18, 2),
     status VARCHAR(20),
-    
 );
 
 CREATE TABLE Transactions (
