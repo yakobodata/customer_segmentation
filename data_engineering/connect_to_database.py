@@ -28,8 +28,3 @@ def connect():
 
 
 
-    # finally:
-    #     # Close the connection
-    #     if 'connection' in locals() and connection.is_connected():
-    #         connection.close()
-    #         print("MySQL connection is closed")
