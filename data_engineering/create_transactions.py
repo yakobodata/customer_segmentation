@@ -67,12 +67,12 @@ def create_transactions():
 
     return transactional_data
     
-# def delete_duplicates():
-#     # Execute a query to select a specific column from a table
-#     column_name = 'account_id'  # Replace 'column_name_here' with your column name
-#     table_name = 'Account'    # Replace 'table_name_here' with your table name
-#     query = f"DELETE t1 FROM {table_name} t1 JOIN (SELECT {column_name} FROM {table_name} GROUP BY {column_name} HAVING COUNT(*) > 1) t2 ON t1.{column_name} = t2.{column_name};"
-#     return query
+def delete_duplicates():
+    # Execute a query to select a specific column from a table
+    column_name = 'account_id'  # Replace 'column_name_here' with your column name
+    table_name = 'Account'    # Replace 'table_name_here' with your table name
+    query = f"DELETE t1 FROM {table_name} t1 JOIN (SELECT {column_name} FROM {table_name} GROUP BY {column_name} HAVING COUNT(*) > 1) t2 ON t1.{column_name} = t2.{column_name};"
+    return query
 
 #Run the create accounts function
 transactions = create_transactions()
@@ -91,11 +91,11 @@ for entry in transactions:
 # Commit the changes to the database
 connect_to_database.connection.commit()
 
-#Delete any duplicates
-# cursor.execute(delete_duplicates())
+# Delete any duplicates
+cursor.execute(delete_duplicates())
 
-# # Commit the changes to the database
-# connect_to_database.connection.commit()
+# Commit the changes to the database
+connect_to_database.connection.commit()
      
 # Close the cursor and connection
 cursor.close()

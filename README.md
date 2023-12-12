@@ -61,18 +61,16 @@ CREATE TABLE Payments (
     recipient VARCHAR(100),
     amount DECIMAL(18, 2),
     payment_date DATE,
-    payment_method VARCHAR(50),
-    FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
+    payment_method VARCHAR(50)
 );
 
 CREATE TABLE CreditHistory (
-    credit_id INT PRIMARY KEY,
+    credit_id INT ,
     customer_id INT,
     credit_score INT,
     credit_limit DECIMAL(18, 2),
     payment_history TEXT,
     credit_utilization DECIMAL(5, 2),
-    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 
 CREATE TABLE Security (
