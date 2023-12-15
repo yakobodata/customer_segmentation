@@ -92,12 +92,11 @@ CREATE TABLE Relationships (
 );
 
 CREATE TABLE CommunicationLog (
-    log_id INT PRIMARY KEY,
+    log_id INT ,
     customer_id INT,
     communication_type VARCHAR(50),
     timestamp DATETIME,
-    summary TEXT,
-    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+    summary TEXT
 );
 
 CREATE TABLE Compliance (
